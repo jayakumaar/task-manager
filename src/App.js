@@ -57,6 +57,9 @@ function App() {
         <h1>Task Manager</h1>
         <span className="task-count">{tasks.length} Tasks</span>
         <div className="theme-toggle-container">
+          <label className="toggle-label">
+            {isDarkMode ? 'Dark Mode' : 'Light Mode'}
+          </label>
           <label className="switch">
             <input
               type="checkbox"

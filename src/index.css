@@ -181,14 +181,21 @@ button[type="submit"]:hover {
 
 /* Slider Toggle Styles */
 .theme-toggle-container {
-  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-label {
+  font-size: 1rem;
+  margin-right: 10px;
+  color: #333;
 }
 
 .switch {
   position: relative;
   display: inline-block;
-  width: 50px;
-  height: 25px;
+  width: 34px;
+  height: 20px;
 }
 
 .switch input {
@@ -212,19 +219,19 @@ button[type="submit"]:hover {
 .slider:before {
   position: absolute;
   content: "";
-  height: 15px;
-  width: 15px;
-  border-radius: 50px;
-  left: 4px;
-  bottom: 4px;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 2px;
+  bottom: 2px;
   background-color: white;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #4CAF50;
+  background-color: #4CAF50; /* Green when checked */
 }
 
 input:checked + .slider:before {
-  transform: translateX(25px);
+  transform: translateX(14px); /* Move the slider when checked */
 }
