@@ -1,33 +1,42 @@
-name: React CI/CD Pipeline
+name: Deploy React App to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Triggers the pipeline whenever you push to the main branch
+      - main  # Change 'main' to your branch name if different
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Using the latest version of Ubuntu for the build process
+  deploy:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2  # Checkout the code from your GitHub repository
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
+      # Step 2: Set up Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Install Node.js version 16
+          node-version: 16  # Use a compatible Node.js version
 
+      # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install  # Install the dependencies defined in your package.json
+        run: npm install
 
-      - name: Run tests
-        run: npm test -- --coverage  # Run your app's tests (optional, but recommended)
+      # Step 4: Build the React app
+      - name: Build the project
+        run: npm run build
 
-      - name: Build the app
-        run: npm run build  # Build the production version of your app
-
-      - name: Deploy to GitHub Pages 
+      # Step 5: Configure Git identity
+      - name: Configure Git identity
         run: |
-          npm install -g gh-pages  # Install the GitHub Pages deploy package
-          npm run deploy  # Assuming you have a deploy script in package.json
+          git config user.name "jayakumaar"
+          git config user.email "mjk34012@gmail.com"
+
+      # Step 6: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
