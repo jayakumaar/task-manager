@@ -1,0 +1,33 @@
+name: React CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Triggers the pipeline whenever you push to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Using the latest version of Ubuntu for the build process
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Checkout the code from your GitHub repository
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Install Node.js version 16
+
+      - name: Install dependencies
+        run: npm install  # Install the dependencies defined in your package.json
+
+      - name: Run tests
+        run: npm test -- --coverage  # Run your app's tests (optional, but recommended)
+
+      - name: Build the app
+        run: npm run build  # Build the production version of your app
+
+      - name: Deploy to GitHub Pages 
+        run: |
+          npm install -g gh-pages  # Install the GitHub Pages deploy package
+          npm run deploy  # Assuming you have a deploy script in package.json
