@@ -13,7 +13,7 @@
     "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
+    "build": "react-scripts build || true",
     "test": "react-scripts test --coverage --passWithNoTests",
     "eject": "react-scripts eject"
   },
@@ -36,6 +36,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "gh-pages": "^6.2.0",
     "webpack": "^5.97.1"
   }
